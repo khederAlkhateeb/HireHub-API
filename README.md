@@ -26,7 +26,7 @@ This document provides a complete reference for all available API endpoints in t
 ---
 
 ## 📊 Admin Endpoints
-
+// you can see examples in the endpoints.txt file ...!
 ### 📈 Get Statistics
 
 **GET** `/api/admin/statistics`
