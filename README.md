@@ -30,7 +30,7 @@ This document provides a complete reference for all available API endpoints in t
 You can test the API using the Postman collection file:
 
 👉 [Download Postman Collection](./HireHub.postman_collection.json)
-👉 [Direct Download](https://raw.githubusercontent.com/USERNAME/REPO/main/HireHub.postman_collection.json)
+👉 [Direct Download](https://github.com/khederAlkhateeb/HireHub-API/blob/main/HireHub.postman_collection.json.txt)
 
 ### How to use:
 
