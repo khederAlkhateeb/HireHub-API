@@ -29,7 +29,7 @@ This document provides a complete reference for all available API endpoints in t
 
 You can test the API using the Postman collection file:
 
-👉 [Download Postman Collection](./HireHub.postman_collection.json)
+👉 [Download Postman Collection](HireHub.postman_collection.json)
 
 ### How to use:
 
