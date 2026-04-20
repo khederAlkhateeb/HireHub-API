@@ -1,0 +1,609 @@
+Admin account :
+
+email : admin@gmail.com
+password : password
+
+route : http://localhost:8000/api/admin/statistics
+response : 
+{
+  "data": {
+    "total_users": 50,
+    "total_projects": 50,
+    "total_proposals": 5,
+    "total_proposals_value": "2250.00",
+    "active_projects": 50
+  }
+}
+
+client account :
+
+email : client2@hirehub.com
+password : password
+
+route : http://localhost:8000/api/home
+
+response : 
+{
+  "latest_projects": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "title": "HireHub Project #1",
+      "description": "Detailed description for project number 1. This is a freelance opportunity.",
+      "budget": "425.00",
+      "budget_type": "hourly",
+      "status": "open",
+      "deadline": "2026-05-04",
+      "created_at": "2026-04-20T11:36:40.000000Z",
+      "updated_at": "2026-04-20T11:36:40.000000Z",
+      "formatted_budget": "$425.00/hr",
+      "deadline_status": "13.465630965312 days left"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "title": "HireHub Project #2",
+      "description": "Detailed description for project number 2. This is a freelance opportunity.",
+      "budget": "4230.00",
+      "budget_type": "fixed",
+      "status": "open",
+      "deadline": "2026-05-20",
+      "created_at": "2026-04-20T11:36:40.000000Z",
+      "updated_at": "2026-04-20T11:36:40.000000Z",
+      "formatted_budget": "$4230.00 USD",
+      "deadline_status": "29.46563095419 days left"
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "title": "HireHub Project #3",
+      "description": "Detailed description for project number 3. This is a freelance opportunity.",
+      "budget": "2462.00",
+      "budget_type": "hourly",
+      "status": "open",
+      "deadline": "2026-05-02",
+      "created_at": "2026-04-20T11:36:40.000000Z",
+      "updated_at": "2026-04-20T11:36:40.000000Z",
+      "formatted_budget": "$2462.00/hr",
+      "deadline_status": "11.465630947222 days left"
+    },
+    {
+      "id": 4,
+      "user_id": 2,
+      "title": "HireHub Project #4",
+      "description": "Detailed description for project number 4. This is a freelance opportunity.",
+      "budget": "279.00",
+      "budget_type": "fixed",
+      "status": "open",
+      "deadline": "2026-05-17",
+      "created_at": "2026-04-20T11:36:40.000000Z",
+      "updated_at": "2026-04-20T11:36:40.000000Z",
+      "formatted_budget": "$279.00 USD",
+      "deadline_status": "26.46563094037 days left"
+    },
+    {
+      "id": 5,
+      "user_id": 2,
+      "title": "HireHub Project #5",
+      "description": "Detailed description for project number 5. This is a freelance opportunity.",
+      "budget": "685.00",
+      "budget_type": "hourly",
+      "status": "open",
+      "deadline": "2026-05-15",
+      "created_at": "2026-04-20T11:36:40.000000Z",
+      "updated_at": "2026-04-20T11:36:40.000000Z",
+      "formatted_budget": "$685.00/hr",
+      "deadline_status": "24.465630933333 days left"
+    }
+  ]
+}
+
+route : http://localhost:8000/api/home
+
+response : 
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "HireHub Project #1",
+      "formatted_budget": "$425.00/hr",
+      "deadline_status": "13 days left",
+      "proposals_count": 0,
+      "client": {
+        "id": 2,
+        "name": "Client Number 2",
+        "average_rating": null
+      },
+      "tags": [
+        {
+          "id": 2,
+          "name": "API"
+        },
+        {
+          "id": 1,
+          "name": "Backend"
+        }
+      ]
+    }
+  ],
+  "links": {
+    "first": "http://localhost:8000/api/projects?page=1",
+    "last": "http://localhost:8000/api/projects?page=50",
+    "prev": null,
+    "next": "http://localhost:8000/api/projects?page=2"
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 50,
+    "links": [
+      {
+        "url": null,
+        "label": "&laquo; Previous",
+        "page": null,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=1",
+        "label": "1",
+        "page": 1,
+        "active": true
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=2",
+        "label": "2",
+        "page": 2,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=3",
+        "label": "3",
+        "page": 3,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=4",
+        "label": "4",
+        "page": 4,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=5",
+        "label": "5",
+        "page": 5,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=6",
+        "label": "6",
+        "page": 6,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=7",
+        "label": "7",
+        "page": 7,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=8",
+        "label": "8",
+        "page": 8,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=9",
+        "label": "9",
+        "page": 9,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=10",
+        "label": "10",
+        "page": 10,
+        "active": false
+      },
+      {
+        "url": null,
+        "label": "...",
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=49",
+        "label": "49",
+        "page": 49,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=50",
+        "label": "50",
+        "page": 50,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/projects?page=2",
+        "label": "Next &raquo;",
+        "page": 2,
+        "active": false
+      }
+    ],
+    "path": "http://localhost:8000/api/projects",
+    "per_page": 1,
+    "to": 1,
+    "total": 50
+  }
+}
+
+route : http://localhost:8000/api/project/{id}
+
+response : 
+{
+  "data": {
+    "id": 2,
+    "title": "HireHub Project #2",
+    "formatted_budget": "$4230.00 USD",
+    "deadline_status": "29 days left",
+    "proposals_count": 5,
+    "client": {
+      "id": 2,
+      "name": "Client Number 2",
+      "average_rating": null
+    },
+    "tags": [
+      {
+        "id": 2,
+        "name": "API"
+      },
+      {
+        "id": 1,
+        "name": "Backend"
+      }
+    ]
+  }
+}
+
+route : http://localhost:8000/api/freelancers
+
+response : 
+{
+  "data": [
+    {
+      "id": 50,
+      "full_name": "Freelancer Expert 25",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    },
+    {
+      "id": 47,
+      "full_name": "Freelancer Expert 22",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    },
+    {
+      "id": 48,
+      "full_name": "Freelancer Expert 23",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    },
+    {
+      "id": 49,
+      "full_name": "Freelancer Expert 24",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    },
+    {
+      "id": 43,
+      "full_name": "Freelancer Expert 18",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    },
+    {
+      "id": 44,
+      "full_name": "Freelancer Expert 19",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    },
+    {
+      "id": 45,
+      "full_name": "Freelancer Expert 20",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    },
+    {
+      "id": 46,
+      "full_name": "Freelancer Expert 21",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    },
+    {
+      "id": 41,
+      "full_name": "Freelancer Expert 16",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    },
+    {
+      "id": 42,
+      "full_name": "Freelancer Expert 17",
+      "bio": null,
+      "verified": false,
+      "skills": [],
+      "experience_years": null,
+      "rating": 0,
+      "projects_count": 0
+    }
+  ],
+  "links": {
+    "first": "http://localhost:8000/api/freelancers?page=1",
+    "last": "http://localhost:8000/api/freelancers?page=3",
+    "prev": null,
+    "next": "http://localhost:8000/api/freelancers?page=2"
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 3,
+    "links": [
+      {
+        "url": null,
+        "label": "&laquo; Previous",
+        "page": null,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/freelancers?page=1",
+        "label": "1",
+        "page": 1,
+        "active": true
+      },
+      {
+        "url": "http://localhost:8000/api/freelancers?page=2",
+        "label": "2",
+        "page": 2,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/freelancers?page=3",
+        "label": "3",
+        "page": 3,
+        "active": false
+      },
+      {
+        "url": "http://localhost:8000/api/freelancers?page=2",
+        "label": "Next &raquo;",
+        "page": 2,
+        "active": false
+      }
+    ],
+    "path": "http://localhost:8000/api/freelancers",
+    "per_page": 10,
+    "to": 10,
+    "total": 25
+  }
+}
+
+route : http://localhost:8000/api/freelancer/{id} : id >=26
+
+response : {
+  "data": {
+    "id": 44,
+    "full_name": "Freelancer Expert 19",
+    "bio": null,
+    "verified": false,
+    "skills": [],
+    "experience_years": null,
+    "rating": 0,
+    "projects_count": 0
+  }
+}
+
+route : http://localhost:8000/api/user
+
+response : {
+  "id": 2,
+  "first_name": "Client",
+  "last_name": "Number 2",
+  "email": "client2@hirehub.com",
+  "type": "client",
+  "phone": "96390000002",
+  "city_id": 2,
+  "email_verified_at": null,
+  "created_at": "2026-04-20T11:36:23.000000Z",
+  "updated_at": "2026-04-20T11:36:23.000000Z",
+  "full_name": "Client Number 2"
+}
+
+route : http://localhost:8000/api/profile
+
+response : {
+  "user": {
+    "id": 49,
+    "full_name": "Freelancer Expert 24",
+    "email": "free24@hirehub.com",
+    "type": "freelancer",
+    "phone": "96391111124",
+    "location": {
+      "city": "Amsterdam",
+      "country": "Netherlands"
+    },
+    "profile": {
+      "bio": "This is the professional bio for freelancer number 24.",
+      "hourly_rate": "58.00",
+      "status": "available",
+      "avatar_url": "http://localhost:8000/default-avatar.png",
+      "rating": "No rating"
+    },
+    "skills": []
+  }
+}
+
+reoute : http://localhost:8000/api/profile
+
+response : 
+{
+  "message": "Profile updated successfully"
+}
+
+route : http://localhost:8000/api/profile/skills
+
+json : {
+    "skills": [
+        {
+            "id": 1,
+            "years": 3
+        },
+        {
+            "id": 2,
+            "years": 5
+        }
+    ]
+}
+
+response : 
+{
+  "message": "Skills updated successfully"
+}
+
+route : http://localhost:8000/api/project
+
+json : 
+{
+  "title": "Build Laravel API The title field must be at least 25 characters",
+  "description": "Need backend developer he description field must be at least 100 characters. he description field must be at least 100 characters. he descript",
+  "budget": 1000,
+  "budget_type": "fixed",
+  "status": "open",
+  "deadline": "2026-05-01",
+  "tags": [1, 2]
+}
+
+response : 
+{
+  "data": {
+    "id": 53,
+    "title": "Build Laravel API The title field must be at least 25 characters",
+    "formatted_budget": "$1000 USD",
+    "deadline_status": "10 days left",
+    "proposals_count": null,
+    "client": {
+      "id": 2,
+      "name": "Client Number 2",
+      "average_rating": null
+    },
+    "tags": [
+      {
+        "id": 2,
+        "name": "API"
+      },
+      {
+        "id": 1,
+        "name": "Backend"
+      }
+    ]
+  }
+}
+
+route : http://localhost:8000/api/project/2/proposals
+
+json : {
+  "amount": 900,
+  "delivery_days": 7,
+  "proposal": "I can do it fast and clean The proposal field must be at least 50 characters.The proposal field must be at least 50 characters."
+}
+
+response : {
+  "data": {
+    "id": 6,
+    "amount": 900,
+    "duration": null,
+    "description": null,
+    "status": null,
+    "created_at": "0 seconds ago"
+  }
+}
+
+route : http://localhost:8000/api/proposals/{id}
+
+response : 
+{
+  "data": {
+    "id": 1,
+    "amount": "450.00",
+    "duration": null,
+    "description": null,
+    "status": "rejected",
+    "created_at": "1 hour ago",
+    "rejection_reason": null
+  }
+}
+
+route : http://localhost:8000/api/proposals/1/accept
+
+response : 
+{
+  "message": "Accepted"
+}
+
+route : http://localhost:8000/api/performance-test
+
+response : 
+{
+  "message": "HireHub Phase 3 Performance Comparison",
+  "stats": {
+    "projects": {
+      "old_way": {
+        "total_queries": 52,
+        "execution_time": "368.64 ms"
+      },
+      "new_way": {
+        "total_queries": 2,
+        "execution_time": "18.68 ms"
+      }
+    },
+    "freelancers": {
+      "old_way": {
+        "total_queries": 26,
+        "execution_time": "358.26 ms"
+      },
+      "new_way": {
+        "total_queries": 2,
+        "execution_time": "121.31 ms"
+      }
+    }
+  }
+}
