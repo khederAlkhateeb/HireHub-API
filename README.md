@@ -25,8 +25,22 @@ This document provides a complete reference for all available API endpoints in t
 
 ---
 
-## 📊 Admin Endpoints
+## 📬 API Collection (Postman)
 
+You can test the API using the Postman collection file:
+
+👉 [Download Postman Collection](./HireHub.postman_collection.json)
+👉 [Direct Download](https://github.com/khederAlkhateeb/HireHub-API/blob/main/HireHub.postman_collection.json.txt)
+
+### How to use:
+
+1. Open Postman
+2. Click Import
+3. Upload the JSON file
+4. Start testing 🚀
+
+
+## 📊 Admin Endpoints
 ### 📈 Get Statistics
 
 **GET** `/api/admin/statistics`

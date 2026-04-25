@@ -1,0 +1,191 @@
+{
+  "info": {
+    "name": "HireHub API",
+    "_postman_id": "12345678-1234-1234-1234-123456789012",
+    "description": "HireHub API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Statistics",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/statistics"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Home",
+      "item": [
+        {
+          "name": "Latest Projects",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/home"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "All Projects",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/projects"
+          }
+        },
+        {
+          "name": "Single Project",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/project/2"
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Build Laravel API The title field must be at least 25 characters\",\n  \"description\": \"Need backend developer description must be long enough...\",\n  \"budget\": 1000,\n  \"budget_type\": \"fixed\",\n  \"status\": \"open\",\n  \"deadline\": \"2026-05-01\",\n  \"tags\": [1,2]\n}"
+            },
+            "url": "{{base_url}}/project"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Proposals",
+      "item": [
+        {
+          "name": "Submit Proposal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 900,\n  \"delivery_days\": 7,\n  \"proposal\": \"I can do it fast and clean...\"\n}"
+            },
+            "url": "{{base_url}}/project/2/proposals"
+          }
+        },
+        {
+          "name": "Get Proposal",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/proposals/1"
+          }
+        },
+        {
+          "name": "Accept Proposal",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/proposals/1/accept"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Freelancers",
+      "item": [
+        {
+          "name": "All Freelancers",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/freelancers"
+          }
+        },
+        {
+          "name": "Single Freelancer",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/freelancer/44"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Current User",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/user"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/profile"
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/profile"
+          }
+        },
+        {
+          "name": "Update Skills",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"skills\": [\n    {\"id\":1,\"years\":3},\n    {\"id\":2,\"years\":5}\n  ]\n}"
+            },
+            "url": "{{base_url}}/profile/skills"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Performance",
+      "item": [
+        {
+          "name": "Performance Test",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/performance-test"
+          }
+        }
+      ]
+    }
+  ]
+}
