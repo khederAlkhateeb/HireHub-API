@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
 
 class FreelancerService
 {
@@ -22,33 +23,39 @@ class FreelancerService
      */
     public function getAllFreelancers($filters = [])
     {
-        $query = User::query()
-            ->where('type', 'freelancer') 
-            ->with(['skills'])
-            ->withAvg('receivedReviews as average_rating', 'rating')
-            ->withCount('completedProjects'); 
+        $page = request('page', 1);
+        $perPage = 10;
+        $cacheKey = "freelancers.list." . md5(serialize($filters) . "|{$page}|{$perPage}");
 
-        // Filter: only verified freelancers
-        if (isset($filters['verified']) && $filters['verified'] == true) {
-            $query->whereNotNull('email_verified_at'); 
-        }
+        return Cache::tags(['freelancers'])->remember($cacheKey, 3600, function () use ($filters, $perPage) {
+            $query = User::query()
+                ->where('type', 'freelancer')
+                ->whereHas('profile', function ($query) {
+                    $query->available();
+                })
+                ->with(['skills', 'profile'])
+                ->withAvg('receivedReviews as average_rating', 'rating')
+                ->withCount('completedProjects');
 
-        // Filter: freelancers having a specific skill
-        if (isset($filters['skill_id'])) {
-            $query->whereHas('skills', function (Builder $q) use ($filters) {
-                $q->where('id', $filters['skill_id']);
-            });
-        }
+            if (isset($filters['verified']) && $filters['verified'] == true) {
+                $query->whereNotNull('email_verified_at');
+            }
 
-        // Sorting logic: by rating or latest
-        $sortBy = $filters['sort_by'] ?? 'latest';
-        if ($sortBy === 'rating') {
-            $query->orderByDesc('average_rating');
-        } else {
-            $query->latest();
-        }
+            if (isset($filters['skill_id'])) {
+                $query->whereHas('skills', function ($q) use ($filters) {
+                    $q->where('id', $filters['skill_id']);
+                });
+            }
 
-        return $query->paginate(10);
+            $sortBy = $filters['sort_by'] ?? 'latest';
+            if ($sortBy === 'rating') {
+                $query->orderByDesc('average_rating');
+            } else {
+                $query->latest();
+            }
+
+            return $query->paginate(10);
+        });
     }
 
     /**
@@ -70,7 +77,7 @@ class FreelancerService
     {
         return User::query()
             ->where('type', 'freelancer')
-            ->with(['skills', 'portfolio']) 
+            ->with(['skills', 'portfolio'])
             ->withAvg('receivedReviews as average_rating', 'rating')
             ->withCount(['completedProjects', 'receivedReviews'])
             ->findOrFail($id);
