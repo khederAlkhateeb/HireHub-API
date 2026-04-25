@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Project;
 use App\Http\Resources\ProjectResource;
+use App\Services\HomeService;
 
 class HomeController extends Controller
 {
+    public function __construct(protected HomeService $homeService)
+    {
+    }
+
     public function index()
     {
+        $projects = $this->homeService->getLatestProjects();
+
         return response()->json([
-            'latest_projects' => Project::latest()->take(5)->get(),
+            'latest_projects' => ProjectResource::collection($projects),
         ]);
     }
 }

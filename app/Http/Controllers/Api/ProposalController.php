@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProposalRequest;
 use App\Http\Resources\ProposalResource;
 use App\Services\ProposalService;
-use App\Models\Proposal;
 
 class ProposalController extends Controller
 {
@@ -30,13 +29,13 @@ class ProposalController extends Controller
     public function show($id)
     {
         $proposal = $this->proposalService->getProposalDetails($id);
+
         return new ProposalResource($proposal);
     }
+
     public function accept($id)
     {
-        $proposal = Proposal::findOrFail($id);
-
-        app(ProposalService::class)->acceptProposal($proposal);
+        $this->proposalService->acceptProposalById($id);
 
         return response()->json(['message' => 'Accepted']);
     }

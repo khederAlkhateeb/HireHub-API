@@ -4,9 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-use App\Models\Project;
-use App\Models\User;
-
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\FreelancerController;
@@ -14,6 +11,8 @@ use App\Http\Controllers\Api\ProposalController;
 use App\Http\Controllers\Api\AdminStatsController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PerformanceController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
      * Common Authenticated Routes
      * Accessible by any logged-in user to manage their basic account data.
      */
-    Route::get('/user', fn(Request $request) => $request->user());
+    Route::get('/user', [UserController::class, 'me']);
     Route::get('/profile', [ProfileController::class, 'show']);
 
     /**
@@ -86,68 +85,6 @@ Route::middleware('auth:sanctum')->group(function () {
 // Admin & Founders Statistics
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/admin/statistics', [AdminStatsController::class, 'index']);
+    Route::get('/performance-test', [PerformanceController::class, 'index']);
 });
-/*
-|--------------------------------------------------------------------------
-| 4. Phase 3: Performance Analysis & Testing
-|--------------------------------------------------------------------------
-| Dedicated routes to compare Eager Loading vs Lazy Loading (N+1 Solution).
-*/
 
-Route::get('/performance-test', function () {
-    $results = [];
-    // --- TEST 1: Projects Performance ---
-    // A. Old Way (N+1 Problem)
-
-    DB::flushQueryLog();
-    DB::enableQueryLog();
-
-    $start = microtime(true);
-    $projectsOld = Project::all();
-
-    foreach ($projectsOld as $project) {
-        $name = $project->client->name; // Triggering N+1
-    }
-    $results['projects']['old_way'] = [
-        'total_queries' => count(DB::getQueryLog()),
-        'execution_time' => round((microtime(true) - $start) * 1000, 2) . ' ms',
-    ];
-    // B. New Way (Eager Loading - Phase 3 Solution)
-    DB::flushQueryLog();
-
-    $start = microtime(true);
-    $projectsNew = Project::with(['client'])->withCount('proposals')->get();
-    $results['projects']['new_way'] = [
-        'total_queries' => count(DB::getQueryLog()),
-        'execution_time' => round((microtime(true) - $start) * 1000, 2) . ' ms',
-    ];
-    // --- TEST 2: Freelancers Performance ---
-    // A. Old Way (N+1 Problem)
-    DB::flushQueryLog();
-
-    $start = microtime(true);
-    $freelancersOld = User::where('type', 'freelancer')->get();
-    foreach ($freelancersOld as $freelancer) {
-        $bio = $freelancer->profile->bio ?? ''; // Triggering N+1
-    }
-    $results['freelancers']['old_way'] = [
-        'total_queries' => count(DB::getQueryLog()),
-        'execution_time' => round((microtime(true) - $start) * 1000, 2) . ' ms',
-    ];
-    // B. New Way (Eager Loading + Avg Rating)
-    DB::flushQueryLog();
-
-    $start = microtime(true);
-    $freelancersNew = User::freelancers() // Using Scope from Phase 2
-        ->with(['profile'])
-        ->withAvg('receivedReviews', 'rating')
-        ->get();
-    $results['freelancers']['new_way'] = [
-        'total_queries' => count(DB::getQueryLog()),
-        'execution_time' => round((microtime(true) - $start) * 1000, 2) . ' ms',
-    ];
-    return response()->json([
-        'message' => 'HireHub Phase 3 Performance Comparison',
-        'stats' => $results
-    ]);
-});

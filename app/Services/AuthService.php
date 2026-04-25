@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class AuthService
@@ -18,11 +19,34 @@ class AuthService
      */
     public function register(array $data)
     {
-        $user = User::create($data);
+        return DB::transaction(function () use ($data) {
+            $userData = array_intersect_key($data, array_flip([
+                'first_name',
+                'last_name',
+                'email',
+                'password',
+                'type',
+                'phone',
+                'city_id',
+            ]));
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+            $profileData = array_intersect_key($data, array_flip([
+                'bio',
+                'hourly_rate',
+                'status',
+                'avatar',
+            ]));
 
-        return [$user, $token];
+            $user = User::create($userData);
+
+            if ($user->type === 'freelancer' && !empty($profileData)) {
+                $user->profile()->create($profileData);
+            }
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return [$user->load('profile'), $token];
+        });
     }
 
     /**

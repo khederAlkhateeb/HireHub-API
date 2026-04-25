@@ -8,11 +8,8 @@ use App\Models\Proposal;
 
 class StatsService
 {
-    public function getGlobalStats()
+    public function getGlobalStats(): array
     {
-        if (auth()->user()->type != "admin") {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
         return [
             'total_users' => User::count(),
             'total_projects' => Project::count(),

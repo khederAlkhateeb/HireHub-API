@@ -3,14 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Services\ProjectService;
 use App\Http\Resources\ProjectResource;
+use App\Services\ProjectService;
 use App\Http\Requests\StoreProjectRequest;
-use App\Services\NotificationService;
-use App\Notifications\EmailNotification;
-use App\Models\User;
-use App\Interfaces\NotificationInterface;
 
 class ProjectController extends Controller
 {

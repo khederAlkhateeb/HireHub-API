@@ -49,5 +49,16 @@ class ProposalService
         // Notify freelancer
         app(NotificationService::class)
             ->send($proposal->freelancer, 'Your proposal was accepted');
+
+        return $proposal;
+    }
+
+    public function acceptProposalById($id)
+    {
+        return DB::transaction(function () use ($id) {
+            $proposal = Proposal::with('project')->findOrFail($id);
+
+            return $this->acceptProposal($proposal);
+        });
     }
 }
