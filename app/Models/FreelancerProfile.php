@@ -12,7 +12,8 @@ class FreelancerProfile extends Model
         'hourly_rate',
         'status',
         'avatar',
-        "is_verified"
+        'is_verified',
+        'average_rating',
     ];
     public function user()
     {
@@ -22,7 +23,8 @@ class FreelancerProfile extends Model
     // CAST...
     protected $casts = [
         'hourly_rate' => 'decimal:2',
-        'is_verified' => 'boolean'
+        'is_verified' => 'boolean',
+        'average_rating' => 'decimal:2',
     ];
 
     //ACCESSORS...
@@ -38,7 +40,9 @@ class FreelancerProfile extends Model
     }
     public function getRatingAttribute()
     {
-        $avg = $this->average_rating ?? $this->user->receivedReviews()->avg('rating');
+        $avg = $this->average_rating > 0
+            ? $this->average_rating
+            : $this->user->receivedReviews()->avg('rating');
 
         return $avg ? '⭐ ' . number_format($avg, 1) : 'No rating';
     }

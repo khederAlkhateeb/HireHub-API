@@ -2,12 +2,10 @@
 
 namespace App\Services;
 
+use App\Jobs\SendProjectCreatedNotification;
 use App\Models\Project;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Cache;
-use App\Notifications\ProjectCreatedNotification;
 
 class ProjectService
 {
@@ -54,6 +52,11 @@ class ProjectService
 
             if (isset($data['tags'])) {
                 $project->tags()->attach($data['tags']);
+            }
+
+            $user = auth()->user();
+            if ($user) {
+                SendProjectCreatedNotification::dispatch($user, $project->title)->afterCommit();
             }
 
             Cache::tags(['projects'])->flush();
