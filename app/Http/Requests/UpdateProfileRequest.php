@@ -13,7 +13,8 @@ class UpdateProfileRequest extends FormRequest
             'first_name'       => 'sometimes|string|max:50',
             'last_name'        => 'sometimes|string|max:50',
             'bio'              => 'nullable|string',
-            'experience_years' => 'sometimes|integer|min:0'
+            'experience_years' => 'sometimes|integer|min:0',
+            'status'           => 'sometimes|in:available,busy,offline',
         ];
     }
 }

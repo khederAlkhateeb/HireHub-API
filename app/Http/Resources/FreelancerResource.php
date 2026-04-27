@@ -17,10 +17,10 @@ class FreelancerResource extends JsonResource
         return [
             'id' => $this->id,
             'full_name' => $this->first_name . ' ' . $this->last_name,
-            'bio' => $this->bio,
+            'bio' => $this->profile->bio ?? null,
             'verified' => $this->email_verified_at !== null,
             'skills' => $this->skills->pluck('name'),
-            'experience_years' => $this->experience_years,
+            'experience_years' => $this->profile->experience_years ?? null,
             'rating' => round($this->average_rating, 1) ?? 0,
             'projects_count' => $this->completed_projects_count ?? 0,
         ];

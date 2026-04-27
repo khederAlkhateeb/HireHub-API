@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\SendProposalStatusNotification;
 use App\Models\Proposal;
 use App\Models\Project;
 use Illuminate\Support\Facades\DB;
@@ -46,9 +47,24 @@ class ProposalService
             ->where('id', '!=', $proposal->id)
             ->update(['status' => 'rejected']);
 
-        // Notify freelancer
-        app(NotificationService::class)
-            ->send($proposal->freelancer, 'Your proposal was accepted');
+        // Notify selected freelancer in the background.
+        SendProposalStatusNotification::dispatch(
+            $proposal->freelancer,
+            'accepted',
+            $proposal->project->title
+        )->afterCommit();
+
+        // Notify rejected freelancers in the background.
+        $proposal->project->proposals()
+            ->where('id', '!=', $proposal->id)
+            ->get()
+            ->each(function ($rejectedProposal) {
+                SendProposalStatusNotification::dispatch(
+                    $rejectedProposal->freelancer,
+                    'rejected',
+                    $rejectedProposal->project->title
+                )->afterCommit();
+            });
 
         return $proposal;
     }
